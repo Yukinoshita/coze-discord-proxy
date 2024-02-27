@@ -28,9 +28,15 @@ jobs:
           name: coze-discord-proxy
           path: coze-discord-proxy
 
+      - name: Generate release tag
+        id: gen_tag
+        run: |
+          echo "::set-output name=release_tag::Build_v$(date +"%Y%m%d_%H%M%S")"
+
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: coze-discord-proxy
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.gen_tag.outputs.release_tag }}
