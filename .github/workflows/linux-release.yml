@@ -25,7 +25,7 @@ jobs:
       - name: Build Backend (amd64)
         run: |
           go mod download
-          go build -ldflags "-s -w -X 'coze-discord-proxy/common.Version=$(git describe --tags)' -extldflags '-static'" -o coze-discord-proxy
+          go build -ldflags "-s -w -linkmode external -X 'coze-discord-proxy/common.Version=$(git describe --tags)' -extldflags '-static'" -o coze-discord-proxy
 
       - name: Build Backend (arm64)
         run: |
